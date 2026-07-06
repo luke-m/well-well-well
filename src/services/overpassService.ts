@@ -24,12 +24,17 @@ export async function fetchWells(bounds: [number, number, number, number]) {
     const [south, west, north, east] = bounds;
 
     // Overpass QL query
-    // We search for nodes, ways, and relations with man_made=well within the bbox
+    // We search for nodes in three categories:
+    //   - amenity=drinking_water: public drinking fountains
+    //   - natural=spring: natural springs
+    //   - man_made=water_well: hand-dug / drilled wells (see SPEC.md "Wells policy")
+    // Node-only: ways and relations with polygon geometry are deliberately out of scope.
     const query = `
     [out:json][timeout:225];
     (
       node["amenity"="drinking_water"](${south},${west},${north},${east});
       node["natural"="spring"](${south},${west},${north},${east});
+      node["man_made"="water_well"](${south},${west},${north},${east});
     );
     out body;
     >;
