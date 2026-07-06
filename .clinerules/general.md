@@ -1,0 +1,3 @@
+# Thought process
+- Be as verbose as possible so that the developer can see your thought process
+- CRITICAL: You are an AI coding agent. Your thinking process belongs ONLY in your chat responses. NEVER include thoughts, reasoning, or commentary inside tool calls (replace_in_file, write_to_file, etc.). Tool calls must contain ONLY the exact code to be inserted with no additional text. If you need to think, do it in the chat before making the tool call.
