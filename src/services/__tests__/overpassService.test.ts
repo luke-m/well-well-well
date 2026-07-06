@@ -1,3 +1,4 @@
+import type { Point } from 'geojson';
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import { fetchWells } from '../overpassService';
 
@@ -36,7 +37,11 @@ describe('overpassService', () => {
     expect(result.type).toBe('FeatureCollection');
     expect(result.features).toHaveLength(1);
     expect(result.features[0].properties?.name).toBe('Test Well');
-    expect(result.features[0].geometry.coordinates).toEqual([-0.05, 51.55]);
+    // `convertToGeoJSON` only ever produces `Point` geometries, but the
+    // `FeatureCollection` return type exposes `Geometry` (a union that
+    // includes `GeometryCollection`, which has no `coordinates`), so narrow
+    // here for the assertion.
+    expect((result.features[0].geometry as Point).coordinates).toEqual([-0.05, 51.55]);
   });
 
   it('should throw an error when the fetch fails', async () => {
