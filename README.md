@@ -32,7 +32,8 @@ npm run dev       # start the dev server (http://localhost:5173)
 - `src/components/WellMap.tsx` — the only screen. Renders a Leaflet map, an OSM tile layer, and a GeoJSON overlay for the current results.
 - `src/services/overpassService.ts` — builds an Overpass QL query for the current bounding box and converts the response into a GeoJSON `FeatureCollection`.
 - A **"Search this area"** button triggers a fresh fetch for the visible bounds. The map's center and zoom are persisted to `localStorage` under the key `mapConfig` and restored on the next load. Clear site data to reset to the default view.
-- Errors from Overpass are surfaced as `OverpassError`; the UI displays them in an inline banner.
+- A **"Center on me"** button triggers a one-shot `navigator.geolocation` request and animates the camera to the user's coordinates, with a small "you are here" marker that auto-clears the moment they pan or zoom away. Permission is re-requested on every click — no grants are remembered and no coordinates are stored beyond the standard `mapConfig` lifecycle. Centering does not auto-fetch wells; the user still clicks "Search this area" afterwards.
+- Errors from Overpass are surfaced as `OverpassError`; the UI displays them in an inline banner. Geolocation errors (denied / unavailable / timeout) share the same inline banner via a sibling `GeolocationError`.
 
 ## Attribution
 
