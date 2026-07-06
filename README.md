@@ -1,16 +1,43 @@
-# React + Vite
+# well-well-well
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A small React + Vite app that shows an interactive OpenStreetMap and surfaces nearby water-related points of interest (drinking water fountains, natural springs, water wells) by querying the [Overpass API](https://overpass-api.de/) for whatever region is currently visible on the map.
 
-Currently, two official plugins are available:
+## Stack
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- [React 19](https://react.dev) + [Vite 8](https://vite.dev) + TypeScript
+- [react-leaflet 5](https://react-leaflet.js.org) on [Leaflet 1.9](https://leafletjs.com)
+- [Tailwind CSS 4](https://tailwindcss.com) (via `@tailwindcss/vite`)
+- [lucide-react](https://lucide.dev) for icons
+- [Vitest](https://vitest.dev) + [@testing-library/react](https://testing-library.com/docs/react-testing-library/intro/) for tests
 
-## React Compiler
+## Getting started
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+```bash
+npm install
+npm run dev       # start the dev server (http://localhost:5173)
+```
 
-## Expanding the ESLint configuration
+## Scripts
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+| Script              | What it does                                       |
+| ------------------- | -------------------------------------------------- |
+| `npm run dev`       | Start the Vite dev server with HMR                 |
+| `npm run build`     | Produce a production build into `dist/`            |
+| `npm run preview`   | Preview the production build locally               |
+| `npm run lint`      | Run ESLint                                          |
+| `npm test`          | Run the Vitest test suite (one-shot)               |
+
+## How it works
+
+- `src/components/WellMap.tsx` — the only screen. Renders a Leaflet map, an OSM tile layer, and a GeoJSON overlay for the current results.
+- `src/services/overpassService.ts` — builds an Overpass QL query for the current bounding box and converts the response into a GeoJSON `FeatureCollection`.
+- A **"Search this area"** button triggers a fresh fetch for the visible bounds. The map's center and zoom are persisted to `localStorage` under the key `mapConfig` and restored on the next load. Clear site data to reset to the default view.
+- Errors from Overpass are surfaced as `OverpassError`; the UI displays them in an inline banner.
+
+## Attribution
+
+Map tiles © [OpenStreetMap contributors](https://www.openstreetmap.org/copyright). POI data from OpenStreetMap via the Overpass API.
+
+## Reset
+
+If the map ever lands in a weird state, clear your browser's site data for this app — the only persisted state is the `mapConfig` key in `localStorage`.
