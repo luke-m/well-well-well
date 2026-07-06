@@ -2,11 +2,10 @@
 
 ## Code Style
 - Use TypeScript for all new files
-- Prefer composition over inheritance
 - Use repository pattern for data access
 
 ## Documentation
-- Update relevant docs when modifying features
+- Check SPEC.md for planned features
 - Keep README.md in sync with new capabilities
 - Keep SPEC.md updated whenever product decisions are made
 
