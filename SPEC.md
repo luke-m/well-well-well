@@ -3,6 +3,11 @@
 > Locked-in design contract. Edit only when an in-scope decision changes.
 > Sources: feature-grilling session, followed by this document.
 
+## Implementation status
+
+- **Shipped:** map viewer, "Search this area" bounding-box refresh, `mapConfig` localStorage persistence, OSM popup node links, wells / fountains / springs Overpass query (unfiltered).
+- **Pending (in scope, not yet built):** Find nearest — one-shot geolocation, Haversine ranking, ranked side list, in-panel disclaimer, fly-to on row select. This is the next implementation; the contract in this document is the source of truth.
+
 ## Target user (v1)
 
 - **Urban refillers** carrying reusable bottles, looking for the nearest free tap in a city.
@@ -50,6 +55,8 @@ Use the browser Geolocation API as a single `getCurrentPosition` call on user re
 - Permission prompt must say: why we want the location, what we do with the coordinate, and that we do not store it.
 
 ## In-scope feature: v1 top pick — Find nearest
+
+> **Status:** Pending implementation. Contract locked in this section; not yet shipped.
 
 - "Locate me" affordance in the existing overlay UI.
 - On activation, request one-shot geolocation.

@@ -8,6 +8,7 @@
 ## Documentation
 - Update relevant docs when modifying features
 - Keep README.md in sync with new capabilities
+- Keep SPEC.md updated whenever product decisions are made
 
 ## Testing
 - Unit tests required for business logic
@@ -15,6 +16,4 @@
 - E2E tests for critical user flows
 
 ## Git workflow
-
-- Never commit to main when creating new features, fixing bugs or refactoring code
-- Always create a new branch before editing files
+- Always create a new branch before editing anything, never work on main directly
