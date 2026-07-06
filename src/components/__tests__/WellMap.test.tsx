@@ -41,7 +41,7 @@ describe('WellMap Component', () => {
   });
 
   it('shows loading state when fetching wells', async () => {
-    (fetchWells as any).mockReturnValue(new Promise((resolve) => {
+    (fetchWells as any).mockReturnValue(new Promise(() => {
       // Never resolve to keep it in loading state
     }));
 

@@ -1,4 +1,3 @@
-import './App.css'
 import WellMap from './components/WellMap'
 
 function App() {

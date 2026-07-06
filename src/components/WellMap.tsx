@@ -2,10 +2,9 @@ import { useState, useEffect, useCallback } from 'react';
 import { MapContainer, TileLayer, GeoJSON, useMapEvents } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import { fetchWells } from '../services/overpassService';
-import type { Feature, Point, FeatureMultiPoint, FeatureCollection } from 'geojson';
+import type { Feature, Point, FeatureCollection } from 'geojson';
 import { Loader2, AlertCircle } from 'lucide-react';
 import L from 'leaflet';
-import { useLocalStorage } from '../hooks/useLocalStorage';
 
 // Fix for default marker icons in Leaflet with React
 import markerIcon from 'leaflet/dist/images/marker-icon.png';
